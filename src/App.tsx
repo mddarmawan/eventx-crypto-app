@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Ticker, TickerCode, TickerData, TickerName } from './Ticker';
+import React, { useEffect, useState } from 'react';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { Ticker } from './Ticker';
 
 interface CardProps {
   tickerData: Ticker;
@@ -9,120 +9,8 @@ interface CardProps {
 let decimalDigit = 5;
 decimalDigit = 10 ** decimalDigit;
 
-const tickersData: Ticker[] = [
-  {
-    ticker: {
-      base: 'BTC',
-      target: 'USD',
-      price: '42154.99647490',
-      volume: '68553.68375147',
-      change: '-185.10466605',
-    },
-    code: 'BTC-USD',
-    name: 'Bitcoin',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-  {
-    ticker: {
-      base: 'ETH',
-      target: 'USD',
-      price: '2936.73934216',
-      volume: '837075.21062595',
-      change: '0.69398693',
-    },
-    code: 'ETH-USD',
-    name: 'Ether',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-  {
-    ticker: {
-      base: 'LTC',
-      target: 'USD',
-      price: '154.92954857',
-      volume: '659689.90312977',
-      change: '-0.65777966',
-    },
-    code: 'LTC-USD',
-    name: 'Litecoin',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-  {
-    ticker: {
-      base: 'DOGE',
-      target: 'USD',
-      price: '0.12801854',
-      volume: '1040971239.03340006',
-      change: '0.00143942',
-    },
-    code: 'DOGE-USD',
-    name: 'Dogecoin',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-  {
-    ticker: {
-      base: 'DOGE',
-      target: 'USD',
-      price: '0.12801854',
-      volume: '1040971239.03340006',
-      change: '0.00143942',
-    },
-    code: 'DOGE-USD',
-    name: 'Dogecoin',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-  {
-    ticker: {
-      base: 'DOGE',
-      target: 'USD',
-      price: '0.12801854',
-      volume: '1040971239.03340006',
-      change: '0.00143942',
-    },
-    code: 'DOGE-USD',
-    name: 'Dogecoin',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-  {
-    ticker: {
-      base: 'DOGE',
-      target: 'USD',
-      price: '0.12801854',
-      volume: '1040971239.03340006',
-      change: '0.00143942',
-    },
-    code: 'DOGE-USD',
-    name: 'Dogecoin',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-  {
-    ticker: {
-      base: 'DOGE',
-      target: 'USD',
-      price: '0.12801854',
-      volume: '1040971239.03340006',
-      change: '0.00143942',
-    },
-    code: 'DOGE-USD',
-    name: 'Dogecoin',
-    timestamp: new Date().getTime(),
-    success: true,
-    error: ''
-  },
-];
+// To be changed
+const client = new W3CWebSocket('wss://0e40b8a50ac5.eu.ngrok.io/');
 
 const Card = (props: CardProps) => {
   const { tickerData } = props;
@@ -160,14 +48,25 @@ const Card = (props: CardProps) => {
 }
 
 function App() {
+  const [tickersData, setTickersData] = useState<Ticker[]>([]);
+
+  useEffect(() => {
+    client.onmessage = (message) => {
+      const { data } = message;
+      const tickersData = JSON.parse(data as string) as Ticker[];
+      setTickersData(tickersData);
+      console.log(tickersData)
+    };
+  }, []);
+
   return (
     <div className="p-4 flex flex-wrap">
       <div className="w-full mb-6">
         <span className="font-semibold text-4xl">Cryptocurrency Realtime Price</span>
       </div>
 
-      {tickersData.map((tickerData) => {
-        return <Card tickerData={tickerData} />;
+      {tickersData.map((tickerData, index) => {
+        return tickerData.success ? <Card key={index} tickerData={tickerData} /> : '';
       })}
     </div>
   );
