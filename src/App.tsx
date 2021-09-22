@@ -66,6 +66,62 @@ const tickersData: Ticker[] = [
     success: true,
     error: ''
   },
+  {
+    ticker: {
+      base: 'DOGE',
+      target: 'USD',
+      price: '0.12801854',
+      volume: '1040971239.03340006',
+      change: '0.00143942',
+    },
+    code: 'DOGE-USD',
+    name: 'Dogecoin',
+    timestamp: new Date().getTime(),
+    success: true,
+    error: ''
+  },
+  {
+    ticker: {
+      base: 'DOGE',
+      target: 'USD',
+      price: '0.12801854',
+      volume: '1040971239.03340006',
+      change: '0.00143942',
+    },
+    code: 'DOGE-USD',
+    name: 'Dogecoin',
+    timestamp: new Date().getTime(),
+    success: true,
+    error: ''
+  },
+  {
+    ticker: {
+      base: 'DOGE',
+      target: 'USD',
+      price: '0.12801854',
+      volume: '1040971239.03340006',
+      change: '0.00143942',
+    },
+    code: 'DOGE-USD',
+    name: 'Dogecoin',
+    timestamp: new Date().getTime(),
+    success: true,
+    error: ''
+  },
+  {
+    ticker: {
+      base: 'DOGE',
+      target: 'USD',
+      price: '0.12801854',
+      volume: '1040971239.03340006',
+      change: '0.00143942',
+    },
+    code: 'DOGE-USD',
+    name: 'Dogecoin',
+    timestamp: new Date().getTime(),
+    success: true,
+    error: ''
+  },
 ];
 
 const Card = (props: CardProps) => {
@@ -74,8 +130,8 @@ const Card = (props: CardProps) => {
   const tickerChange = Math.round(parseFloat(tickerData.ticker.change) * decimalDigit) / decimalDigit;
 
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 mr-4 mb-4">
-      <div className="max-w-sm rounded overflow-hidden border">
+    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2 mb-1">
+      <div className="w-full rounded overflow-hidden border">
         <div className="px-6 py-4">
           <div className="font-bold text-3xl mb-1">{tickerData.name}</div>
           <p className="text-yellow-500 text-xl mb-4">
