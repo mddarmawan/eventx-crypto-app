@@ -25,7 +25,8 @@ export type TickerBase =
   | 'DASH'
   | 'MAID'
   | 'LSK'
-  | 'SJCX';
+  | 'SJCX'
+  | 'ZEC';
 
 export type TickerTarget = 'USD';
 export type TickerCode = `${TickerBase}-${TickerTarget}`;
@@ -40,4 +41,5 @@ export type TickerName =
   | 'Dash'
   | 'MaidSafeeCoin'
   | 'Lisk'
-  | 'Storjoin X';
+  | 'Storjoin X'
+  | 'Zcash';
